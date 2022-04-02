@@ -13,12 +13,19 @@
     <script type="text/javascript" src="./picList.js">
     </script>
     <script>
-        picList.forEach(element => {
-            let dom = document.createElement('img');
-            dom.src = element;
+        function renderImage(picList,num){
+            if(num >= picList.length){
+                return;
+            }
+            let dom = document.createElement("img");
+            dom.onload = function(){
+                renderImage(picList,num + 1);
+            }
+            dom.src = picList[num];
             dom.style.height = "90%";
             document.body.appendChild(dom);
-        });
+        }
+        renderImage(picList,0);
     </script>
 </body>
 </html>
